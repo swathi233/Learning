@@ -1,0 +1,11 @@
+Python 3.8+
+PyPDFLoader
+SentenceTransformer
+BeautifulSoup
+pdfplumber
+FAISS
+langchain_community
+langchain_text_splitters
+langchain_core
+langchain_prompts
+langchain_runnables

@@ -1,0 +1,1 @@
+This synthetic dataset simulates various demographic and socioeconomic factors that influence annual household income. It can be used for exploratory data analysis, predictive modeling, and understanding the relationships between different features and income levels.
