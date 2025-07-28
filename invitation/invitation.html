@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Engagement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #b76e79;
+            --secondary: #d4a5a5;
+            --accent: #e8c4c4;
+            --light: #f9f3f0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(248,232,228,0.8) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(248,232,228,0.8) 0%, transparent 20%);
+            touch-action: manipulation;
+        }
+
+        /* Book-style container */
+        .invitation-book {
+            width: 90%;
+            max-width: 800px;
+            min-height: 600px;
+            position: relative;
+            perspective: 2000px;
+            margin: 40px 0;
+        }
+
+        /* Pages */
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5d9d0 0%, #f8e8e4 100%);
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            box-sizing: border-box;
+            backface-visibility: hidden;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            overflow: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .page1 {
+            z-index: 2;
+            transform-origin: right center;
+            border-right: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .page2 {
+            z-index: 1;
+            transform: rotateY(180deg);
+            transform-origin: left center;
+            border-left: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* When book is "open" */
+        .invitation-book.open .page1 {
+            transform: rotateY(-180deg);
+        }
+
+        .invitation-book.open .page2 {
+            transform: rotateY(0deg);
+        }
+
+        /* Page turn button */
+        .page-turn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 10;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .page-turn:hover, .page-turn:focus {
+            transform: scale(1.1);
+            background: #9e5c66;
+        }
+
+        .page-turn.page2-turn {
+            right: auto;
+            left: 20px;
+        }
+
+        /* Common styles for both pages */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin: 0;
+            text-shadow: 3px 3px 0 rgba(255,255,255,0.5);
+            background: linear-gradient(to right, #b76e79, #d4a5a5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 10px rgba(183,110,121,0.3); }
+            100% { text-shadow: 0 0 20px rgba(183,110,121,0.6); }
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            letter-spacing: 4px;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Page 1 specific styles */
+        .couple-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 
+                0 0 0 10px var(--accent),
+                0 0 0 15px white,
+                0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .couple-photo:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 
+                0 0 0 10px var(--primary),
+                0 0 0 15px white,
+                0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .couple-photo:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background: linear-gradient(45deg, transparent 65%, rgba(183,110,121,0.3) 100%);
+            z-index: 2;
+        }
+
+        .couple-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .save-the-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--primary);
+            text-align: center;
+            margin: 30px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Page 2 specific styles */
+        .couple-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 30px 0;
+            color: #555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .couple-names span {
+            margin: 0 15px;
+        }
+
+        .and {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .details {
+            text-align: center;
+            margin: 40px 0;
+            line-height: 1.8;
+        }
+
+        .details p {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .date, .venue {
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        /* Interactive Address with QR Code */
+        .address-container {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .address {
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .address:hover {
+            background-color: rgba(255,255,255,0.7);
+        }
+
+        .qr-popup {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            width: 180px;
+            margin-bottom: 15px;
+        }
+
+        .address-container:hover .qr-popup, .address-container.active .qr-popup {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            background: #f5f5f5;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed var(--secondary);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .qr-label {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .rsvp-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #c2818a);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(183, 110, 121, 0.4);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .rsvp-button:hover, .rsvp-button:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(183, 110, 121, 0.6);
+        }
+
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Stickers */
+        .sticker {
+            position: absolute;
+            font-size: 2rem;
+            animation: wiggle 3s ease-in-out infinite;
+            opacity: 0.8;
+            z-index: 5;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* Enhanced Mobile Styles */
+        @media (max-width: 768px) {
+            .invitation-book {
+                height: auto;
+                min-height: 100vh;
+                margin: 20px 0;
+                perspective: none;
+            }
+            
+            .page {
+                padding: 20px;
+                position: relative;
+                height: auto;
+                min-height: 100vh;
+                transform: none !important;
+                backface-visibility: visible;
+                display: none;
+                overflow-y: auto;
+            }
+            
+            .page.active {
+                display: block;
+            }
+            
+            .page-turn {
+                position: fixed;
+                bottom: 10px;
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .couple-photo {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .couple-names {
+                font-size: 2rem;
+            }
+            
+            .and {
+                font-size: 2.5rem;
+            }
+            
+            .qr-popup {
+                left: 0;
+                transform: translateX(0);
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .invitation-book.open .page1,
+            .invitation-book.open .page2 {
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .invitation-book {
+                height: auto;
+                width: 95%;
+            }
+            
+            .page {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+                margin-top: 20px;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .couple-photo {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .save-the-date {
+                font-size: 1.5rem;
+            }
+            
+            .couple-names {
+                font-size: 1.5rem;
+                flex-direction: column;
+            }
+            
+            .and {
+                margin: 10px 0;
+            }
+            
+            .qr-code {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .details p {
+                font-size: 1rem;
+            }
+            
+            .date, .venue {
+                font-size: 1.1rem;
+            }
+            
+            .rsvp-button {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="invitation-book" id="invitationBook">
+        <!-- Page 1 -->
+        <div class="page page1 active">
+            <!-- Stickers -->
+            <div class="sticker" style="top: 10%; left: 10%;">💖</div>
+            <div class="sticker" style="bottom: 15%; right: 10%;">🌸</div>
+            
+            <div class="header">
+                <h1 class="animate__animated animate__pulse">Our Engagement</h1>
+                <div class="subtitle animate__animated animate__fadeIn">Together with their families</div>
+            </div>
+            
+            <div class="couple-photo animate__animated animate__zoomIn">
+                <img src="pic.jpg" alt="Engagement Photo">
+            </div>
+            
+            <div class="save-the-date animate__animated animate__fadeInUp">
+                Save the Date
+            </div>
+            
+            <div class="details animate__animated animate__fadeIn">
+                <p>We're over the moon to share</p>
+                <p>this special moment with you!</p>
+                <p class="date animate__animated animate__pulse animate__delay-1s">September 05, 2025</p>
+            </div>
+            
+            <button class="page-turn animate__animated animate__bounceIn animate__delay-2s" aria-label="Next page">→</button>
+        </div>
+        
+        <!-- Page 2 -->
+        <div class="page page2">
+            <!-- Stickers -->
+            <div class="sticker" style="top: 13%; right: 25%;">💍</div>
+            <div class="sticker" style="bottom: 20%; left: 15%;">🎉</div>
+            
+            <div class="couple-names animate__animated animate__fadeIn">
+                <span class="animate__animated animate__fadeInLeft">Swathi</span>
+                <span class="and animate__animated animate__heartBeat animate__infinite">&</span>
+                <span class="animate__animated animate__fadeInRight">Anup</span>
+            </div>
+            
+            <div class="details animate__animated animate__fadeIn animate__delay-1s">
+                <p>Invite you to celebrate their engagement</p>
+                
+                <p class="date">Friday, September 05, 2025</p>
+                <p>at nine o'clock in the morning</p>
+                
+                <div class="address-container" id="addressContainer">
+                    <div class="address">
+                        <p class="venue">The Rose Garden</p>
+                        <p>Sri Sai Party hall, Opposite to National college</p>
+                        <p>Bengaluru, Jayanagara</p>
+                    </div>
+                    <div class="qr-popup">
+                        <div class="qr-code">
+                            <!-- Replace with your actual QR code image -->
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.google.com/maps/place/12%C2%B055'27.1%22N+77%C2%B034'40.5%22E/@12.9241944,77.5753418,17z/data=!3m1!4b1!4m4!3m3!8m2!3d12.9241944!4d77.5779167?entry=ttu" alt="Location QR Code">
+                        </div>
+                        <div class="qr-label">Scan for directions 📲</div>
+                    </div>
+                </div>
+            </div>
+            <button class="page-turn page2-turn animate__animated animate__bounceIn animate__delay-3s" aria-label="Previous page">←</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating hearts
+        function createHearts() {
+            const colors = ['#ff6b6b', '#ff8787', '#f8a5a5', '#ffb8b8'];
+            const emojis = ['❤', '💖', '💗', '💓'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heart.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(heart);
+            }
+        }
+        
+        // Page turning functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            createHearts();
+            
+            const book = document.getElementById('invitationBook');
+            const page1 = document.querySelector('.page1');
+            const page2 = document.querySelector('.page2');
+            const page1Turn = document.querySelector('.page-turn:not(.page2-turn)');
+            const page2Turn = document.querySelector('.page2-turn');
+            
+            function togglePages() {
+                if (window.innerWidth <= 768) {
+                    // Mobile behavior - simple show/hide
+                    page1.classList.toggle('active');
+                    page2.classList.toggle('active');
+                } else {
+                    // Desktop behavior - 3D flip
+                    book.classList.toggle('open');
+                }
+            }
+            
+            page1Turn.addEventListener('click', togglePages);
+            page2Turn.addEventListener('click', togglePages);
+            
+            // Add some hearts when clicking RSVP button
+            const rsvpBtn = document.getElementById('rsvpBtn');
+            if (rsvpBtn) {
+                rsvpBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    for (let i = 0; i < 10; i++) {
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        heart.innerHTML = '💖';
+                        heart.style.left = (e.clientX || e.touches[0].clientX) + 'px';
+                        heart.style.top = (e.clientY || e.touches[0].clientY) + 'px';
+                        heart.style.color = '#ff6b6b';
+                        heart.style.fontSize = '25px';
+                        heart.style.animationDuration = '4s';
+                        document.body.appendChild(heart);
+                    }
+                    alert("Thank you for RSVPing! We're excited to celebrate with you!");
+                });
+            }
+            
+            // Touch support for mobile devices
+            const addressContainer = document.getElementById('addressContainer');
+            if (addressContainer) {
+                // Click/touch handler for QR code
+                addressContainer.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const qrPopup = this.querySelector('.qr-popup');
+                    qrPopup.classList.toggle('active');
+                });
+                
+                // Close QR when clicking elsewhere
+                document.addEventListener('click', function() {
+                    const qrPopup = document.querySelector('.qr-popup');
+                    if (qrPopup) {
+                        qrPopup.classList.remove('active');
+                    }
+                });
+                
+                // Touch support for mobile
+                addressContainer.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    const qrPopup = this.querySelector('.qr-popup');
+                    qrPopup.classList.toggle('active');
+                }, {passive: false});
+            }
+            
+            // Improved touch support
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Prevent zooming on double-tap
+            document.addEventListener('dblclick', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            // Handle orientation changes
+            window.addEventListener('orientationchange', function() {
+                // Force a resize event to handle layout changes
+                window.dispatchEvent(new Event('resize'));
+            });
+        });
+    </script>
+</body>
+</html>
