@@ -1,0 +1,35 @@
+# requirements.txt
+# Core
+streamlit==1.28.1
+chromadb==0.4.18
+sentence-transformers==2.2.2
+
+# ML/AI
+torch==2.1.0
+torchvision==0.16.0
+transformers==4.35.2
+openai==0.28.1
+langchain==0.0.350
+faiss-cpu==1.7.4
+
+# Image Processing
+Pillow==10.1.0
+opencv-python-headless==4.8.1.78
+
+# Data Processing
+numpy==1.24.3
+pandas==2.1.3
+scikit-learn==1.3.2
+
+# Utilities
+python-multipart==0.0.6
+pydantic==2.5.0
+python-dotenv==1.0.0
+pickle5==0.0.12
+tqdm==4.66.1
+
+# Web/API
+requests==2.31.0
+httpx==0.25.1
+fastapi==0.104.1
+uvicorn[standard]==0.24.0

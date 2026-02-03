@@ -1,0 +1,16 @@
+# 🛍️ Multimodal RAG E-commerce Assistant
+
+A local, cloud-free multimodal retrieval-augmented generation assistant for e-commerce products.
+
+## 🚀 Features
+- 🔍 **Text-based product search** using vector embeddings
+- 🖼️ **Multimodal capabilities** (text + image search)
+- 🐳 **Docker containerized** for easy deployment
+- ☁️ **No cloud required** - runs completely locally
+- 🎨 **Streamlit UI** for interactive experience
+
+## 📊 Database Types Used
+1. **Vector Database (ChromaDB)**: For semantic search
+2. **In-memory storage**: For product metadata
+3. **File-based storage**: For images and embeddings
+
